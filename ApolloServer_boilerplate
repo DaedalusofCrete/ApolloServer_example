@@ -1,0 +1,20 @@
+# Step 1: install apollo-server and graphql dependencies 
+
+npm install apollo-server graphql
+
+# initialize and run apollo-server
+
+import { ApolloServer } from 'apollo-server';
+
+async function startApolloServer(typeDefs, resolvers) {
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    csrfPrevention: true,
+    cache: 'bounded',
+    plugins: [ApolloServerPluginLandingPageLocalDefault({ embed: true })],
+  });
+
+  const { url } = await server.listen();
+  console.log(`🚀 Server ready at ${url}`);
+}
